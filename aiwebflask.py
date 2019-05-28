@@ -11,12 +11,6 @@ app = Flask(__name__)
 results = joblib.load('SARIMA_btc_pred.pkl')
 
 @app.route('/', methods=['GET', 'POST'])
-@app.route('/hi/<name>')
-def hello(name = None):
-    return render_template('index.html', name=name)
-# name is parameter in the template: {{name}}
-
-@app.route('/predict')
 def predict():
     return render_template('prediction.html')
 
@@ -28,7 +22,7 @@ def predicted():
         
         predicted = predicted[len(predicted)-1]
 
-        return render_template("predicted.html", content=months, prediction=predicted)
+        return render_template("predicted.html", months=months, prediction=predicted)
 
 @app.route('/bye')
 def bye():
